@@ -25,10 +25,7 @@ function validarBusqueda(e) {
 
 function consultarAPI(busqueda){
     const githubUrl = `https://jobs.github.com/positions.json?search=${busqueda}`;
-
-    // Para la API de githubjobs debemos utilizar un proxi para poder mostrar sus datos, esto ya que github tiene protegida su API contra el uso libre y no entrega apikey tampoco
-    const url = `https://api.allorigins.win/get?url=${ encodeURIComponent(githubUrl) }`; // la funcion encodeURIComponent aplica un encodig a la url que le pasamos, y es nativa de JS
-    // el .get no es necesario, pero en caso de no escribirlo es esto lo que hace de todas formas.
+    const url = `https://api.allorigins.win/get?url=${ encodeURIComponent(githubUrl) }`;
     axios.get(url)
         .then( respuesta => mostrarVacantes(JSON.parse(respuesta.data.contents)));
 }
@@ -56,8 +53,6 @@ function mostrarVacantes(vacantes){
     while( resultado.firstChild ){
         resultado.removeChild(resultado.firstChild);
     }
-
-
 
     if ( vacantes.length > 0 ){
         resultado.classList.add('grid');    
